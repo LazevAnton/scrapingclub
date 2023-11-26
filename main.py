@@ -9,7 +9,7 @@ def get_data():
         try:
             session = requests.Session()
             responce = session.get(
-                url='https://scrapingclub.com/exercise/list_basic/',
+                url='https://scrapingclub.com/exercise/list_basic/?page={page}',
                 cookies=COOKIES,
                 headers=HEADERS
             )
