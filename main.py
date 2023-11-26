@@ -13,9 +13,9 @@ def get_data():
                 cookies=COOKIES,
                 headers=HEADERS
             )
+            print(f'{status_code}')
         except Exception as data_er:
-            print(f'Что то пошло не так - {data_er}')
-            
+            print(f'Что то пошло не так - {data_er}\n{status_code}')        
         soup = BeautifulSoup(responce.text, 'lxml')
         cards = soup.find_all('div', class_='w-full rounded border')
         for card in cards:
