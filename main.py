@@ -21,12 +21,12 @@ def get_data():
         for card in cards:
             title = card.find('div', class_='p-4').find('h4').find('a').text.strip()
             price = card.find('div', class_='p-4').find('h5').text.strip()
-            card_url = f'{DETAIL_URL}{card.find('a').get('href').strip()}'
+            card_url = f'{DETAIL_URL}{card.find("a").get("href").strip()}'
             cards_detail.append((title, price, card_url))
     print('Cбор данных окончен')
     with open('scrapingclub.txt', 'w', encoding='utf8') as file:
         for title, price, card_url in cards_detail:
-            file.writelines(f'{'#' * 20}\nНаименование и цена:\n{title} - {price}\nurl - {DETAIL_URL}{card_url}\n')
+            file.writelines(f'{"#" * 20}\nНаименование и цена:\n{title} - {price}\nurl - {DETAIL_URL}{card_url}\n')
             
 def main():
     get_data()
