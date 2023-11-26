@@ -14,9 +14,8 @@ def get_data():
                 headers=HEADERS
             )
         except Exception as data_er:
-            print(f'Что то пошло не так\
-                Код запроса - {responce.status_code}\
-                    {data_er}')
+            print(f'Что то пошло не так - {data_er}')
+            
         soup = BeautifulSoup(responce.text, 'lxml')
         cards = soup.find_all('div', class_='w-full rounded border')
         for card in cards:
