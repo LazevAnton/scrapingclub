@@ -5,7 +5,7 @@ from config import COOKIES, HEADERS, DETAIL_URL
 def get_data():
     print('Начинаем сбор данных')
     cards_detail = []
-    for page in range(1,7):
+    for page in range(1, 8):
         try:
             session = requests.Session()
             responce = session.get(
