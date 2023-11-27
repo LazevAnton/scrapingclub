@@ -8,6 +8,8 @@ def writer(data):
     page = book.add_worksheet('одежда')
     # Включаем жирный текст
     bold = book.add_format({'bold': True})
+    # Включаем центровку
+    centered_format = book.add_format({'align': 'center'})
     # В указанные столбцы прописываем названия 
     page.write('A1', 'Название', bold)
     page.write('B1', 'Цена', bold)
@@ -18,7 +20,7 @@ def writer(data):
     column = 0
     # Прописываем ширину ячеек
     page.set_column('A:A', 20)
-    page.set_column('B:B', 20, cell_format={'align': 'center'})
+    page.set_column('B:B', 20, centered_format)
     page.set_column('C:C', 250)
 
     for item in data():
