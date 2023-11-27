@@ -1,34 +1,35 @@
-import requests, lxml
-from bs4 import BeautifulSoup
-from config import COOKIES, HEADERS, DETAIL_URL
+from main import get_card_data
+import xlsxwriter
 
-def get_data():
-    print('Начинаем сбор данных')
-    cards_detail = []
-    for page in range(1, 8):
-        try:
-            session = requests.Session()
-            responce = session.get(
-                url='https://scrapingclub.com/exercise/list_basic/?page={page}',
-                cookies=COOKIES,
-                headers=HEADERS
-            )
-        except Exception as data_er:
-            print(f'Что то пошло не так - {data_er}\n{responce.status_code}')
-        soup = BeautifulSoup(responce.text, 'lxml')
-        cards = soup.find_all('div', class_='w-full rounded border')
-        for card in cards:
-            title = card.find('div', class_='p-4').find('h4').find('a').text.strip()
-            price = card.find('div', class_='p-4').find('h5').text.strip()
-            card_url = f'{DETAIL_URL}{card.find("a").get("href").strip()}'
-            cards_detail.append((title, price, card_url))
-    print('Cбор данных окончен')
-    with open('scrapingclub.txt', 'w', encoding='utf8') as file:
-        for title, price, card_url in cards_detail:
-            file.writelines(f'{"#" * 20}\nНаименование и цена:\n{title} - {price}\nurl - {DETAIL_URL}{card_url}\n')
-            
+def writer(data):
+    book = xlsxwriter.Workbook('scrapingclub.xlsx')
+    page = book.add_page('одежда')
+
+    bold = book.add_format({'bold': True})
+
+    page.write('A1', 'Название', bold)
+    page.write('B1', 'Цена', bold)
+    page.write('C1', 'Описание', bold)
+
+    row = 1
+    column = 1
+
+    page.set_column('A:A', 20)
+    page.set_column('B:B', 20)
+    page.set_column('C:C', 50)
+
+    for item in data():
+        page.writerow(row, column, item[1])
+        page.writerow(row, column+1, item[2])
+        page.writerow(row, column+2, item[3])
+        row +=1
+
+    book.close()
+
+writer(get_card_data)
+
 def main():
-    get_data()
+    writer()
 
-if __name__ == '__main__':
+if __name__ =='__main__':
     main()
