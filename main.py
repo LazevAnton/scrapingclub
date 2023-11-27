@@ -19,17 +19,16 @@ def writer(data):
     page.set_column('C:C', 50)
 
     for item in data():
-        page.writerow(row, column, item[1])
-        page.writerow(row, column+1, item[2])
-        page.writerow(row, column+2, item[3])
+        page.write(row, column, item[0])
+        page.write(row, column+1, item[1])
+        page.write(row, column+2, item[2])
         row +=1
 
     book.close()
 
-writer(get_card_data)
-
 def main():
-    writer()
+    writer(get_card_data)
 
 if __name__ =='__main__':
     main()
+    
