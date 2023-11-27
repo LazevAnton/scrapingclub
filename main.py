@@ -1,8 +1,9 @@
 import xlsxwriter
+from services import get_card_data
 
 def writer(data):
     book = xlsxwriter.Workbook('scrapingclub.xlsx')
-    page = book.add_page('одежда')
+    page = book.add_worksheet('одежда')
 
     bold = book.add_format({'bold': True})
 
