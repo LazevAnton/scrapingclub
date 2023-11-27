@@ -1,4 +1,3 @@
-from main import get_card_data
 import xlsxwriter
 
 def writer(data):
