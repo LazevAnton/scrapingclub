@@ -35,3 +35,4 @@ def get_card_data():
         price = card.find('h4', class_='my-4 card-price').text
         description = card.find('p', class_='card-description').text   
         yield title, price, description
+        
