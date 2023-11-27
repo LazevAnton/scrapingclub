@@ -19,7 +19,7 @@ def writer(data):
     row = 1
     column = 0
     # Прописываем ширину ячеек
-    page.set_column('A:A', 20)
+    page.set_column('A:A', 30)
     page.set_column('B:B', 20, centered_format)
     page.set_column('C:C', 250)
 
